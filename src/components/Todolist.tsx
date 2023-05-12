@@ -1,6 +1,8 @@
 import { useState, ChangeEvent } from 'react';
 import { nanoid } from 'nanoid';
 import styled from 'styled-components';
+import { addTask, editTask, toggleTask, removeTask, selectTasks } from '../store';
+import { useSelector, useDispatch } from 'react-redux';
 
 const Container = styled.div`
     display: flex;
@@ -129,17 +131,13 @@ const Filters = styled.div`
     text-align: center;
 `;
 
-type Task = {
-    id: string;
-    value: string;
-    isCompleted: boolean;
-};
-
 type Filter = 'All' | 'Active' | 'Completed';
 
 function Todolist() {
+    const tasks = useSelector(selectTasks);
+    const dispatch = useDispatch();
+
     const [value, setValue] = useState<string>('');
-    const [tasks, setTasks] = useState<Array<Task>>([]);
     const [filter, setFilter] = useState<Filter>('All');
     const [isEditing, setIsEditing] = useState<boolean>(false);
     const [editedValue, setEditedValue] = useState<string>('');
@@ -150,42 +148,24 @@ function Todolist() {
     }
 
     function editCheckbox(id: string, isCompleted: boolean) {
-        setTasks(tasks.map((task) => {
-            if (task.id === id) {
-                return {
-                    ...task,
-                    isCompleted: !isCompleted
-                };
-            } else {
-                return task;
-            }
-        }));
+        dispatch(toggleTask({ id, isCompleted }))
     }
 
-    function addTask() {
+    function add() {
         if (value.trim() !== '') {
-            const newTask = {
+            const task = {
                 id: nanoid(),
-                value: value.trim(),
+                value: value,
                 isCompleted: false
             };
-            setTasks(tasks.concat(newTask));
+            dispatch(addTask(task));
             setValue('');
         }
     }
 
     function editValue(id: string) {
         if (editedValue.trim() !== '') {
-            setTasks(tasks.map((task) => {
-                if (task.id === id) {
-                    return {
-                        ...task,
-                        value: editedValue
-                    };
-                } else {
-                    return task;
-                }
-            }));
+            dispatch(editTask({ id, value: editedValue }));
         }
 
         setIsEditing(false);
@@ -193,8 +173,8 @@ function Todolist() {
         setEditedValue('');
     }
 
-    function removeTask(id: string) {
-        setTasks(tasks.filter((task) => task.id !== id));
+    function remove(id: string) {
+        dispatch(removeTask(id));
     }
 
     function changeFilter(filter: Filter) {
@@ -219,10 +199,10 @@ function Todolist() {
                     placeholder="Task"
                     onChange={(event) => handleChange(event)}
                     value={value}
-                    onKeyDown={(event) => event.key === 'Enter' && addTask()}
+                    onKeyDown={(event) => event.key === 'Enter' && add()}
                 >
                 </TextInput>
-                <StyledButton onClick={() => addTask()}>Add</StyledButton>
+                <StyledButton onClick={() => add()}>Add</StyledButton>
                 {updatedTasks.length === 0 ? <Message>There is no task yet</Message> :
                     <List>
                         {updatedTasks.map((task) => (
@@ -271,7 +251,7 @@ function Todolist() {
                                 </StyledButton>
                                 <StyledButton
                                     hidden={isEditing}
-                                    onClick={() => removeTask(task.id)}
+                                    onClick={() => remove(task.id)}
                                 >
                                     Remove
                                 </StyledButton>
