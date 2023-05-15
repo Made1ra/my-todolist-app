@@ -12,6 +12,7 @@ const Container = styled.div`
 
     width: 30%;
     height: 42.75em;
+    height: 100%;
 
     border: 0.075em solid black;
 
@@ -125,6 +126,9 @@ const ListItem = styled.li`
     display: flex;
     align-items: center;
     margin: 0.5rem 0;
+    &:nth-child(1) {
+        padding-top: 5rem;
+    }
 `;
 
 const CheckboxInput = styled.input`
@@ -137,6 +141,7 @@ const CheckboxInput = styled.input`
 
 const Message = styled.div`
     margin: 2rem;
+    padding-top: 4rem;
     font-size: 1.5rem;
 `;
 
@@ -157,13 +162,9 @@ const Filters = styled.div`
 
     position: absolute;
     left: 50%;
-    bottom: 20%;
     transform: translateX(-50%);
     text-align: center;
-
-    @media (max-width: 576px) {
-        bottom: 12.5%;
-    }
+    margin-top: 1.5%;
 `;
 
 type Filter = 'All' | 'Active' | 'Completed';
@@ -202,7 +203,6 @@ function Todolist() {
             dispatch(editTask({ id, value: editedValue }));
         }
 
-        // setIsEditing(false);
         setEditedTaskId('');
         setEditedValue('');
     }
@@ -237,6 +237,26 @@ function Todolist() {
                 >
                 </TextInput>
                 <StyledButton onClick={() => add()}>Add</StyledButton>
+                <Filters>
+                    <StyledButton
+                        className={filter === 'All' ? 'active-filter' : 'inactive-filter'}
+                        onClick={() => changeFilter('All')}
+                    >
+                        All
+                    </StyledButton>
+                    <StyledButton
+                        className={filter === 'Active' ? 'active-filter' : 'inactive-filter'}
+                        onClick={() => changeFilter('Active')}
+                    >
+                        Active
+                    </StyledButton>
+                    <StyledButton
+                        className={filter === 'Completed' ? 'active-filter' : 'inactive-filter'}
+                        onClick={() => changeFilter('Completed')}
+                    >
+                        Completed
+                    </StyledButton>
+                </Filters>
                 {updatedTasks.length === 0 ? <Message>There is no task yet</Message> :
                     <List>
                         {updatedTasks.map((task) => (
@@ -276,7 +296,6 @@ function Todolist() {
                                     <>
                                         <StyledButton
                                             onClick={() => {
-                                                // setIsEditing(true);
                                                 setEditedTaskId(task.id);
                                             }}
                                         >
@@ -293,26 +312,6 @@ function Todolist() {
                         ))}
                     </List>
                 }
-                <Filters>
-                    <StyledButton
-                        className={filter === 'All' ? 'active-filter' : 'inactive-filter'}
-                        onClick={() => changeFilter('All')}
-                    >
-                        All
-                    </StyledButton>
-                    <StyledButton
-                        className={filter === 'Active' ? 'active-filter' : 'inactive-filter'}
-                        onClick={() => changeFilter('Active')}
-                    >
-                        Active
-                    </StyledButton>
-                    <StyledButton
-                        className={filter === 'Completed' ? 'active-filter' : 'inactive-filter'}
-                        onClick={() => changeFilter('Completed')}
-                    >
-                        Completed
-                    </StyledButton>
-                </Filters>
             </div>
         </Container >
     );
