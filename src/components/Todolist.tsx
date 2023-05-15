@@ -10,17 +10,32 @@ const Container = styled.div`
 
     background-color: white;
 
-    width: 30vw;
-    height: 80vh;
+    width: 30%;
+    height: 42.75em;
 
-    border: 0.5px solid black;
+    border: 0.075em solid black;
 
-    margin: 20px auto;
-    
+    margin: 1.1em auto;
+
     font-family: 'Lato';
-    font-style: normal;
     font-weight: 500;
-    font-size: 18px;
+    font-size: 1.125em;
+
+    @media (max-width: 1200px) {
+        width: 40%;
+    }
+
+    @media (max-width: 992px) {
+        width: 50%;
+    }
+
+    @media (max-width: 768px) {
+        width: 60%;
+    }
+
+    @media (max-width: 576px) {
+        width: 95%;
+    }
 `;
 
 const StyledHeader = styled.h1`
@@ -41,7 +56,12 @@ const TextInput = styled.input`
     margin-right: 1rem;
 
     &.edit-input {
-        margin-right: 1rem;
+        width: 50%;
+    }
+
+    @media (max-width: 576px) {
+        padding: 0.5rem 0.5rem;
+        margin-left: 1%;
     }
 `;
 
@@ -70,6 +90,10 @@ const StyledButton = styled.button`
         cursor: pointer;
         opacity: 0.9;
     }
+
+    @media (max-width: 576px) {
+        margin-left: 1%;
+    }
 `;
 
 const SubmitButton = styled.button`
@@ -84,6 +108,10 @@ const SubmitButton = styled.button`
 
     &.edit-submit {
         margin-right: 1rem;
+    }
+
+    @media (max-width: 576px) {
+
     }
 `;
 
@@ -124,11 +152,18 @@ const StyledSpan = styled.span`
 `;
 
 const Filters = styled.div`
+    display: flex;
+    flex-wrap: nowrap;
+
     position: absolute;
     left: 50%;
     bottom: 20%;
     transform: translateX(-50%);
     text-align: center;
+
+    @media (max-width: 576px) {
+        bottom: 12.5%;
+    }
 `;
 
 type Filter = 'All' | 'Active' | 'Completed';
@@ -139,7 +174,6 @@ function Todolist() {
 
     const [value, setValue] = useState<string>('');
     const [filter, setFilter] = useState<Filter>('All');
-    const [isEditing, setIsEditing] = useState<boolean>(false);
     const [editedValue, setEditedValue] = useState<string>('');
     const [editedTaskId, setEditedTaskId] = useState<string>('');
 
@@ -168,7 +202,7 @@ function Todolist() {
             dispatch(editTask({ id, value: editedValue }));
         }
 
-        setIsEditing(false);
+        // setIsEditing(false);
         setEditedTaskId('');
         setEditedValue('');
     }
@@ -226,35 +260,35 @@ function Todolist() {
                                         <TextInput
                                             className={'edit-input'}
                                             type="text"
-                                            hidden={!isEditing}
                                             defaultValue={task.value}
                                             onChange={(event) => setEditedValue(event.target.value)}
                                             onKeyDown={(event) => event.key === 'Enter' && editValue(task.id)}
                                         />
                                         <SubmitButton
                                             className={'edit-submit'}
-                                            hidden={!isEditing}
                                             onClick={() => editValue(task.id)}
                                         >
                                             Submit
                                         </SubmitButton>
                                     </>
                                 )}
-                                <StyledButton
-                                    hidden={isEditing}
-                                    onClick={() => {
-                                        setIsEditing(true);
-                                        setEditedTaskId(task.id);
-                                    }}
-                                >
-                                    Edit
-                                </StyledButton>
-                                <StyledButton
-                                    hidden={isEditing}
-                                    onClick={() => remove(task.id)}
-                                >
-                                    Remove
-                                </StyledButton>
+                                {editedTaskId !== task.id && (
+                                    <>
+                                        <StyledButton
+                                            onClick={() => {
+                                                // setIsEditing(true);
+                                                setEditedTaskId(task.id);
+                                            }}
+                                        >
+                                            Edit
+                                        </StyledButton>
+                                        <StyledButton
+                                            onClick={() => remove(task.id)}
+                                        >
+                                            Remove
+                                        </StyledButton>
+                                    </>
+                                )}
                             </ListItem>
                         ))}
                     </List>
