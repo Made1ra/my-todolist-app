@@ -183,7 +183,7 @@ function Todolist() {
     }
 
     function editCheckbox(id: string, isCompleted: boolean) {
-        dispatch(toggleTask({ id, isCompleted }))
+        dispatch(toggleTask({ id, isCompleted }));
     }
 
     function add() {
