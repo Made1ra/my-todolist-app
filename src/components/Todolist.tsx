@@ -11,6 +11,7 @@ import Button from './Button';
 import List from './List';
 import ListItem from './ListItem';
 import Filters from './Filters';
+import Message from './Message';
 
 const SubmitButton = styled.button`
     background-color: #00c853;
@@ -33,12 +34,6 @@ const CheckboxInput = styled.input`
     &:hover {
         cursor: pointer;
     }
-`;
-
-const Message = styled.div`
-    margin: 2rem;
-    padding-top: 4rem;
-    font-size: 1.5rem;
 `;
 
 const StyledSpan = styled.span`
