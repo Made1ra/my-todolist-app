@@ -7,37 +7,7 @@ import Container from './Container';
 import Header from './Header';
 import Heading from './Heading';
 import TextInput from './TextInput';
-
-const StyledButton = styled.button`
-    font-size: 1.5rem;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    border: none;
-    background-color: #eee;
-    margin-right: 1rem;
-
-    &.active-filter {
-        background-color: #00c853;
-        color: #fff;
-        cursor: pointer;
-    }
-
-    &.inactive-filter {
-        background-color: #eee;
-        color: #333;
-        cursor: pointer;
-        margin-right: 1rem;
-    }
-
-    &:hover {
-        cursor: pointer;
-        opacity: 0.9;
-    }
-
-    @media (max-width: 576px) {
-        margin-left: 1%;
-    }
-`;
+import Button from './Button';
 
 const SubmitButton = styled.button`
     background-color: #00c853;
@@ -174,26 +144,26 @@ function Todolist() {
                     onKeyDown={(event) => event.key === 'Enter' && add()}
                 >
                 </TextInput>
-                <StyledButton onClick={() => add()}>Add</StyledButton>
+                <Button onClick={() => add()}>Add</Button>
                 <Filters>
-                    <StyledButton
+                    <Button
                         className={filter === 'All' ? 'active-filter' : 'inactive-filter'}
                         onClick={() => changeFilter('All')}
                     >
                         All
-                    </StyledButton>
-                    <StyledButton
+                    </Button>
+                    <Button
                         className={filter === 'Active' ? 'active-filter' : 'inactive-filter'}
                         onClick={() => changeFilter('Active')}
                     >
                         Active
-                    </StyledButton>
-                    <StyledButton
+                    </Button>
+                    <Button
                         className={filter === 'Completed' ? 'active-filter' : 'inactive-filter'}
                         onClick={() => changeFilter('Completed')}
                     >
                         Completed
-                    </StyledButton>
+                    </Button>
                 </Filters>
                 {updatedTasks.length === 0 ? <Message>There is no task yet</Message> :
                     <List>
@@ -232,18 +202,18 @@ function Todolist() {
                                 )}
                                 {editedTaskId !== task.id && (
                                     <>
-                                        <StyledButton
+                                        <Button
                                             onClick={() => {
                                                 setEditedTaskId(task.id);
                                             }}
                                         >
                                             Edit
-                                        </StyledButton>
-                                        <StyledButton
+                                        </Button>
+                                        <Button
                                             onClick={() => remove(task.id)}
                                         >
                                             Remove
-                                        </StyledButton>
+                                        </Button>
                                     </>
                                 )}
                             </ListItem>
