@@ -23,7 +23,7 @@ Your app is ready to be deployed!
 
 ### `npm run preview`
 
-Locally preview production build
+Locally preview production build.
 
 ## Learn More
 
