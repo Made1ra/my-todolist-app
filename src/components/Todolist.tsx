@@ -3,6 +3,7 @@ import { nanoid } from 'nanoid';
 import styled from 'styled-components';
 import { addTask, editTask, toggleTask, removeTask, selectTasks } from '../store';
 import { useSelector, useDispatch } from 'react-redux';
+import Header from './Header';
 
 const Container = styled.div`
     display: flex;
@@ -37,11 +38,6 @@ const Container = styled.div`
     @media (max-width: 576px) {
         width: 95%;
     }
-`;
-
-const StyledHeader = styled.h1`
-    margin-bottom: 2rem;
-    text-align: center;
 `;
 
 const StyledSmallHeader = styled.h3`
@@ -222,7 +218,7 @@ function Todolist() {
     return (
         <Container>
             <div>
-                <StyledHeader>Todolist</StyledHeader>
+                <Header>Todolist</Header>
                 <StyledSmallHeader>What do you want to add?</StyledSmallHeader>
                 <TextInput
                     type="text"
