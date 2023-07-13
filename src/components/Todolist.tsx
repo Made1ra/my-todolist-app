@@ -10,6 +10,7 @@ import TextInput from './TextInput';
 import Button from './Button';
 import List from './List';
 import ListItem from './ListItem';
+import Filters from './Filters';
 
 const SubmitButton = styled.button`
     background-color: #00c853;
@@ -49,17 +50,6 @@ const StyledSpan = styled.span`
         text-decoration: line-through;
         color: grey;
     }
-`;
-
-const Filters = styled.div`
-    display: flex;
-    flex-wrap: nowrap;
-
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    margin-top: 1.5%;
 `;
 
 type Filter = 'All' | 'Active' | 'Completed';
