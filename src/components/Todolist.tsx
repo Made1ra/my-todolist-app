@@ -8,6 +8,7 @@ import Header from './Header';
 import Heading from './Heading';
 import TextInput from './TextInput';
 import Button from './Button';
+import List from './List';
 
 const SubmitButton = styled.button`
     background-color: #00c853;
@@ -22,12 +23,6 @@ const SubmitButton = styled.button`
     &.edit-submit {
         margin-right: 1rem;
     }
-`;
-
-const List = styled.ul`
-    list-style: none;
-    margin: 0;
-    padding: 0;
 `;
 
 const ListItem = styled.li`
