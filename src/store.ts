@@ -15,14 +15,14 @@ const todolistSlice = createSlice({
         addTask: (state, action: { payload: Task }) => {
             state.tasks.push(action.payload);
         },
-        editTask: (state, action) => {
+        editTask: (state, action: { payload: { id: string, value: string } }) => {
             const index = state.tasks.findIndex((task) => task.id === action.payload.id);
             state.tasks[index] = {
                 ...state.tasks[index],
                 value: action.payload.value
             };
         },
-        toggleTask: (state, action) => {
+        toggleTask: (state, action: { payload: { id: string, isCompleted: boolean } }) => {
             const index = state.tasks.findIndex((task) => task.id === action.payload.id);
             state.tasks[index] = {
                 ...state.tasks[index],

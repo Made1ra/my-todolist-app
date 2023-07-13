@@ -110,10 +110,6 @@ const SubmitButton = styled.button`
     &.edit-submit {
         margin-right: 1rem;
     }
-
-    @media (max-width: 576px) {
-
-    }
 `;
 
 const List = styled.ul`
