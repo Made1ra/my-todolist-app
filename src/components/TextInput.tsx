@@ -21,7 +21,6 @@ const StyledTextInput = styled.input`
 
 type TextInputProps = {
     type: string;
-    children?: React.ReactNode;
     className?: string
     placeholder?: string;
     defaultValue?: string;
@@ -30,9 +29,17 @@ type TextInputProps = {
     onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => false | void;
 };
 
-function TextInput({ children }: TextInputProps) {
+function TextInput({ type, className, placeholder, defaultValue, value, onChange, onKeyDown }: TextInputProps) {
     return (
-        <StyledTextInput>{children}</StyledTextInput>
+        <StyledTextInput
+            type={type}
+            className={className}
+            placeholder={placeholder}
+            defaultValue={defaultValue}
+            value={value}
+            onChange={onChange}
+            onKeyDown={onKeyDown}
+        />
     );
 }
 

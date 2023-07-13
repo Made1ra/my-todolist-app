@@ -7,6 +7,7 @@ const StyledButton = styled.button`
     border: none;
     background-color: #eee;
     margin-right: 1rem;
+    cursor: pointer;
 
     &.active-filter {
         background-color: #00c853;
@@ -22,7 +23,6 @@ const StyledButton = styled.button`
     }
 
     &:hover {
-        cursor: pointer;
         opacity: 0.9;
     }
 
@@ -37,9 +37,14 @@ type ButtonProps = {
     onClick: () => void;
 };
 
-function Button({ children }: ButtonProps) {
+function Button({ children, className, onClick }: ButtonProps) {
     return (
-        <StyledButton>{children}</StyledButton>
+        <StyledButton
+            className={className}
+            onClick={onClick}
+        >
+            {children}
+        </StyledButton>
     );
 }
 

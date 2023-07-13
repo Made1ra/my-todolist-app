@@ -1,6 +1,5 @@
 import { useState, ChangeEvent } from 'react';
 import { nanoid } from 'nanoid';
-import styled from 'styled-components';
 import { addTask, editTask, toggleTask, removeTask, selectTasks } from '../store';
 import { useSelector, useDispatch } from 'react-redux';
 import Container from './Container';
@@ -12,40 +11,8 @@ import List from './List';
 import ListItem from './ListItem';
 import Filters from './Filters';
 import Message from './Message';
-
-const SubmitButton = styled.button`
-    background-color: #00c853;
-    color: #fff;
-    cursor: pointer;
-
-    font-size: 1.5rem;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    border: none;
-
-    &.edit-submit {
-        margin-right: 1rem;
-    }
-`;
-
-const CheckboxInput = styled.input`
-    margin-right: 1rem;
-
-    &:hover {
-        cursor: pointer;
-    }
-`;
-
-const StyledSpan = styled.span`
-    margin: 1.5rem 0.5rem 1.5rem 0;
-
-    font-size: 1.5rem;
-
-    &.completed {
-        text-decoration: line-through;
-        color: grey;
-    }
-`;
+import CheckboxInput from './CheckboxInput';
+import Text from './Text';
 
 type Filter = 'All' | 'Active' | 'Completed';
 
@@ -106,7 +73,7 @@ function Todolist() {
     return (
         <Container>
             <div>
-                <Header>Todolist</Header>
+                <Header>To-Do List</Header>
                 <Heading>What do you want to add?</Heading>
                 <TextInput
                     type="text"
@@ -114,8 +81,7 @@ function Todolist() {
                     onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event)}
                     value={value}
                     onKeyDown={(event) => event.key === 'Enter' && add()}
-                >
-                </TextInput>
+                />
                 <Button onClick={() => add()}>Add</Button>
                 <Filters>
                     <Button
@@ -145,15 +111,14 @@ function Todolist() {
                                     type="checkbox"
                                     defaultChecked={task.isCompleted}
                                     onClick={() => editCheckbox(task.id, task.isCompleted)}
-                                >
-                                </CheckboxInput>
+                                />
                                 {
                                     (editedTaskId !== task.id) && (
-                                        <StyledSpan
+                                        <Text
                                             className={task.isCompleted ? 'completed' : ''}
                                         >
                                             {task.value}
-                                        </StyledSpan>
+                                        </Text>
                                     )}
                                 {editedTaskId === task.id && (
                                     <>
@@ -164,12 +129,12 @@ function Todolist() {
                                             onChange={(event) => setEditedValue(event.target.value)}
                                             onKeyDown={(event) => event.key === 'Enter' && editValue(task.id)}
                                         />
-                                        <SubmitButton
-                                            className={'edit-submit'}
+                                        <Button
+                                            className={'active-filter'}
                                             onClick={() => editValue(task.id)}
                                         >
                                             Submit
-                                        </SubmitButton>
+                                        </Button>
                                     </>
                                 )}
                                 {editedTaskId !== task.id && (
