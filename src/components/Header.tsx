@@ -6,7 +6,7 @@ const StyledHeader = styled.h1`
 `;
 
 type HeaderProps = {
-    children: React.ReactNode;
+    children?: React.ReactNode;
 };
 
 function Header({ children }: HeaderProps) {

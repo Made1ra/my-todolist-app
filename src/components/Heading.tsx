@@ -5,7 +5,7 @@ const StyledHeading = styled.h3`
 `;
 
 type HeadingProps = {
-    children: React.ReactNode;
+    children?: React.ReactNode;
 };
 
 function Heading({ children }: HeadingProps) {

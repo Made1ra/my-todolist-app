@@ -36,7 +36,7 @@ const StyledContainer = styled.div`
 `;
 
 type ContainerProps = {
-    children: React.ReactNode;
+    children?: React.ReactNode;
 };
 
 function Container({ children }: ContainerProps) {
