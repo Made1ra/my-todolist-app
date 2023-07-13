@@ -25,15 +25,6 @@ const SubmitButton = styled.button`
     }
 `;
 
-const ListItem = styled.li`
-    display: flex;
-    align-items: center;
-    margin: 0.5rem 0;
-    &:nth-child(1) {
-        padding-top: 5rem;
-    }
-`;
-
 const CheckboxInput = styled.input`
     margin-right: 1rem;
 
