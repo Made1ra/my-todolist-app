@@ -27,6 +27,6 @@ Locally preview production build.
 
 ## Learn More
 
-You can learn more in the [Vite documentation](https://vitejs.dev/guide/).
+You can learn more in the [Vite documentation](https://vitejs.dev/).
 
 To learn React, check out the [React documentation](https://react.dev/).
