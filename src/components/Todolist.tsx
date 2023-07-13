@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { addTask, editTask, toggleTask, removeTask, selectTasks } from '../store';
 import { useSelector, useDispatch } from 'react-redux';
 import Header from './Header';
+import Heading from './Heading';
 
 const Container = styled.div`
     display: flex;
@@ -38,10 +39,6 @@ const Container = styled.div`
     @media (max-width: 576px) {
         width: 95%;
     }
-`;
-
-const StyledSmallHeader = styled.h3`
-    text-align: center;
 `;
 
 const TextInput = styled.input`
@@ -219,7 +216,7 @@ function Todolist() {
         <Container>
             <div>
                 <Header>Todolist</Header>
-                <StyledSmallHeader>What do you want to add?</StyledSmallHeader>
+                <Heading>What do you want to add?</Heading>
                 <TextInput
                     type="text"
                     placeholder="Task"
