@@ -19,7 +19,6 @@ const StyledButton = styled.button`
         background-color: #eee;
         color: #333;
         cursor: pointer;
-        margin-right: 1rem;
     }
 
     &:hover {
