@@ -6,24 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Container from './Container';
 import Header from './Header';
 import Heading from './Heading';
-
-const TextInput = styled.input`
-    font-size: 1.5rem;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    border: none;
-    background-color: #eee;
-    margin-right: 1rem;
-
-    &.edit-input {
-        width: 50%;
-    }
-
-    @media (max-width: 576px) {
-        padding: 0.5rem 0.5rem;
-        margin-left: 1%;
-    }
-`;
+import TextInput from './TextInput';
 
 const StyledButton = styled.button`
     font-size: 1.5rem;
@@ -186,7 +169,7 @@ function Todolist() {
                 <TextInput
                     type="text"
                     placeholder="Task"
-                    onChange={(event) => handleChange(event)}
+                    onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event)}
                     value={value}
                     onKeyDown={(event) => event.key === 'Enter' && add()}
                 >
