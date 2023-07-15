@@ -10,15 +10,15 @@ const StyledCheckboxInput = styled.input`
 
 type CheckboxInputProps = {
     type: string;
-    defaultChecked: boolean;
+    checked: boolean;
     onClick: () => void;
 };
 
-function CheckboxInput({ type, defaultChecked, onClick }: CheckboxInputProps) {
+function CheckboxInput({ type, checked, onClick }: CheckboxInputProps) {
     return (
         <StyledCheckboxInput
             type={type}
-            defaultChecked={defaultChecked}
+            checked={checked}
             onClick={onClick}
         />
     );

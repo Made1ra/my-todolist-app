@@ -26,18 +26,18 @@ function App() {
   const tasks = useSelector(selectTasks);
   const dispatch = useDispatch();
 
-  const [value, setValue] = useState<string>('');
+  const [value, setValue] = useState('');
   const [filter, setFilter] = useState<Filter>('All');
-  const [editedValue, setEditedValue] = useState<string>('');
-  const [editedTaskId, setEditedTaskId] = useState<string>('');
+  const [editedValue, setEditedValue] = useState('');
+  const [editedTaskId, setEditedTaskId] = useState('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
-  }
+  };
 
   const editCheckbox = (id: string, isCompleted: boolean) => {
     dispatch(toggleTask({ id, isCompleted }));
-  }
+  };
 
   const add = () => {
     if (value.trim() !== '') {
@@ -49,7 +49,7 @@ function App() {
       dispatch(addTask(task));
       setValue('');
     }
-  }
+  };
 
   const editValue = (id: string) => {
     if (editedValue.trim() !== '') {
@@ -58,23 +58,27 @@ function App() {
 
     setEditedTaskId('');
     setEditedValue('');
-  }
+  };
 
   const remove = (id: string) => {
     dispatch(removeTask(id));
-  }
+  };
 
-  const changeFilter = (filter: Filter) => {
-    setFilter(filter);
-  }
+  const changeFilter = (selectedFilter: Filter) => {
+    setFilter(selectedFilter);
+  };
 
-  let updatedTasks = tasks;
+  const filterTasks = (filter: Filter) => {
+    if (filter === 'Active') {
+      return tasks.filter((task) => task.isCompleted === false);
+    } else if (filter === 'Completed') {
+      return tasks.filter((task) => task.isCompleted === true);
+    } else {
+      return tasks;
+    }
+  };
 
-  if (filter === 'Active') {
-    updatedTasks = tasks.filter((task) => task.isCompleted === false);
-  } else if (filter === 'Completed') {
-    updatedTasks = tasks.filter((task) => task.isCompleted === true);
-  }
+  const updatedTasks = filterTasks(filter);
 
   return (
     <Container>
@@ -84,7 +88,7 @@ function App() {
         <TextInput
           type="text"
           placeholder="Task"
-          onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
+          onChange={(e) => handleChange(e)}
           value={value}
           onKeyDown={(e) => e.key === 'Enter' && add()}
         />
@@ -117,7 +121,7 @@ function App() {
               <ListItem key={task.id}>
                 <CheckboxInput
                   type="checkbox"
-                  defaultChecked={task.isCompleted}
+                  checked={task.isCompleted}
                   onClick={() => editCheckbox(task.id, task.isCompleted)}
                 />
                 {editedTaskId !== task.id ? (
@@ -156,7 +160,7 @@ function App() {
           </List>
         )}
       </div>
-    </Container >
+    </Container>
   );
 }
 
