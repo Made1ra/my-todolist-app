@@ -25,8 +25,8 @@ function Todolist() {
     const [editedValue, setEditedValue] = useState<string>('');
     const [editedTaskId, setEditedTaskId] = useState<string>('');
 
-    function handleChange(event: ChangeEvent<HTMLInputElement>) {
-        setValue(event.target.value);
+    function handleChange(e: ChangeEvent<HTMLInputElement>) {
+        setValue(e.target.value);
     }
 
     function editCheckbox(id: string, isCompleted: boolean) {
@@ -78,9 +78,9 @@ function Todolist() {
                 <TextInput
                     type="text"
                     placeholder="Task"
-                    onChange={(event: ChangeEvent<HTMLInputElement>) => handleChange(event)}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
                     value={value}
-                    onKeyDown={(event) => event.key === 'Enter' && add()}
+                    onKeyDown={(e) => e.key === 'Enter' && add()}
                 />
                 <Button onClick={() => add()}>Add</Button>
                 <Filters>
@@ -126,8 +126,8 @@ function Todolist() {
                                             className={'edit-input'}
                                             type="text"
                                             defaultValue={task.value}
-                                            onChange={(event) => setEditedValue(event.target.value)}
-                                            onKeyDown={(event) => event.key === 'Enter' && editValue(task.id)}
+                                            onChange={(e) => setEditedValue(e.target.value)}
+                                            onKeyDown={(e) => e.key === 'Enter' && editValue(task.id)}
                                         />
                                         <Button
                                             className={'active-filter'}
