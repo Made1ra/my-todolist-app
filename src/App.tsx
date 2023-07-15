@@ -103,9 +103,7 @@ function App() {
             Active
           </Button>
           <Button
-            className={
-              filter === 'Completed' ? 'active-filter' : 'inactive-filter'
-            }
+            className={filter === 'Completed' ? 'active-filter' : 'inactive-filter'}
             onClick={() => changeFilter('Completed')}
           >
             Completed
